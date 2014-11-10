@@ -15,6 +15,8 @@
 		CE1749DD19FEEF54002B7FBA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE1749DC19FEEF54002B7FBA /* Images.xcassets */; };
 		CE1749E019FEEF54002B7FBA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1749DE19FEEF54002B7FBA /* LaunchScreen.xib */; };
 		CE1749EC19FEEF54002B7FBA /* PIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1749EB19FEEF54002B7FBA /* PIOTests.swift */; };
+		CE1749F719FEFCF9002B7FBA /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1749F619FEFCF9002B7FBA /* Item.swift */; };
+		CED87A2B1A086B69007C319C /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED87A2A1A086B69007C319C /* Photo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,10 @@
 		CE1749E519FEEF54002B7FBA /* PIOTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PIOTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE1749EA19FEEF54002B7FBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE1749EB19FEEF54002B7FBA /* PIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIOTests.swift; sourceTree = "<group>"; };
+		CE1749F519FEF822002B7FBA /* PIO 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PIO 2.xcdatamodel"; sourceTree = "<group>"; };
+		CE1749F619FEFCF9002B7FBA /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		CED87A271A085113007C319C /* PIO 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PIO 3.xcdatamodel"; sourceTree = "<group>"; };
+		CED87A2A1A086B69007C319C /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +94,8 @@
 				CE1749DC19FEEF54002B7FBA /* Images.xcassets */,
 				CE1749DE19FEEF54002B7FBA /* LaunchScreen.xib */,
 				CE1749D219FEEF54002B7FBA /* PIO.xcdatamodeld */,
+				CED87A2A1A086B69007C319C /* Photo.swift */,
+				CE1749F619FEFCF9002B7FBA /* Item.swift */,
 				CE1749CE19FEEF54002B7FBA /* Supporting Files */,
 			);
 			path = PIO;
@@ -167,6 +175,7 @@
 				TargetAttributes = {
 					CE1749CA19FEEF54002B7FBA = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 2HH9PF63UY;
 					};
 					CE1749E419FEEF54002B7FBA = {
 						CreatedOnToolsVersion = 6.1;
@@ -218,9 +227,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE1749F719FEFCF9002B7FBA /* Item.swift in Sources */,
 				CE1749D419FEEF54002B7FBA /* PIO.xcdatamodeld in Sources */,
 				CE1749D119FEEF54002B7FBA /* AppDelegate.swift in Sources */,
 				CE1749D619FEEF54002B7FBA /* MasterViewController.swift in Sources */,
+				CED87A2B1A086B69007C319C /* Photo.swift in Sources */,
 				CE1749D819FEEF54002B7FBA /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,6 +355,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = PIO/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -354,6 +366,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = PIO/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -413,6 +426,7 @@
 				CE1749F119FEEF54002B7FBA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CE1749F219FEEF54002B7FBA /* Build configuration list for PBXNativeTarget "PIOTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +435,7 @@
 				CE1749F419FEEF54002B7FBA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
@@ -428,9 +443,11 @@
 		CE1749D219FEEF54002B7FBA /* PIO.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				CED87A271A085113007C319C /* PIO 3.xcdatamodel */,
+				CE1749F519FEF822002B7FBA /* PIO 2.xcdatamodel */,
 				CE1749D319FEEF54002B7FBA /* PIO.xcdatamodel */,
 			);
-			currentVersion = CE1749D319FEEF54002B7FBA /* PIO.xcdatamodel */;
+			currentVersion = CED87A271A085113007C319C /* PIO 3.xcdatamodel */;
 			path = PIO.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

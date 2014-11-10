@@ -8,26 +8,40 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController,
+    UITextFieldDelegate, UITextViewDelegate,
+    UIImagePickerControllerDelegate {
 
     @IBOutlet weak var detailDescriptionLabel: UILabel!
 
-
-    var detailItem: AnyObject? {
+    @IBOutlet weak var itemTitle: UITextField!
+    @IBOutlet weak var itemProblem: UITextView!
+    
+    var detailItem: Item? {
         didSet {
             // Update the view.
-            self.configureView()
+            if self.isViewLoaded() {
+                self.configureView()
+            }
         }
     }
 
     func configureView() {
         // Update the user interface for the detail item.
-        if let detail: AnyObject = self.detailItem {
+        if let detail = self.detailItem {
             if let label = self.detailDescriptionLabel {
-                label.text = detail.valueForKey("timeStamp")!.description
+                label.text = NSDate(timeIntervalSince1970: detail.timestamp).description
+            }
+            if let itemTitle = self.itemTitle {
+                if let title = detail.title {
+                    itemTitle.text = title
+                }
+                else {
+                    itemTitle.text = "Test"
+                }
             }
         }
-    }
+    } // configureView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
