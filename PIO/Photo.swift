@@ -11,7 +11,8 @@ import CoreData
 
 class Photo: NSManagedObject {
 
-    @NSManaged var imageData: NSData
+    @NSManaged var imageData: ImageData?
+    @NSManaged var imageMetaData: ImageMetaData?
     @NSManaged var item: Item
 
 }

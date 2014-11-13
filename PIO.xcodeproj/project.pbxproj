@@ -16,6 +16,8 @@
 		CE1749E019FEEF54002B7FBA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1749DE19FEEF54002B7FBA /* LaunchScreen.xib */; };
 		CE1749EC19FEEF54002B7FBA /* PIOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1749EB19FEEF54002B7FBA /* PIOTests.swift */; };
 		CE1749F719FEFCF9002B7FBA /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1749F619FEFCF9002B7FBA /* Item.swift */; };
+		CE53C4BB1A11796C005E28FB /* ImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE53C4BA1A11796C005E28FB /* ImageData.swift */; };
+		CE53C4BD1A1179DE005E28FB /* ImageMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE53C4BC1A1179DE005E28FB /* ImageMetaData.swift */; };
 		CED87A2B1A086B69007C319C /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED87A2A1A086B69007C319C /* Photo.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +46,9 @@
 		CE1749EB19FEEF54002B7FBA /* PIOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIOTests.swift; sourceTree = "<group>"; };
 		CE1749F519FEF822002B7FBA /* PIO 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PIO 2.xcdatamodel"; sourceTree = "<group>"; };
 		CE1749F619FEFCF9002B7FBA /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		CE53C4B71A117696005E28FB /* PIO 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PIO 4.xcdatamodel"; sourceTree = "<group>"; };
+		CE53C4BA1A11796C005E28FB /* ImageData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageData.swift; sourceTree = "<group>"; };
+		CE53C4BC1A1179DE005E28FB /* ImageMetaData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageMetaData.swift; sourceTree = "<group>"; };
 		CED87A271A085113007C319C /* PIO 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PIO 3.xcdatamodel"; sourceTree = "<group>"; };
 		CED87A2A1A086B69007C319C /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +99,8 @@
 				CE1749DC19FEEF54002B7FBA /* Images.xcassets */,
 				CE1749DE19FEEF54002B7FBA /* LaunchScreen.xib */,
 				CE1749D219FEEF54002B7FBA /* PIO.xcdatamodeld */,
+				CE53C4BC1A1179DE005E28FB /* ImageMetaData.swift */,
+				CE53C4BA1A11796C005E28FB /* ImageData.swift */,
 				CED87A2A1A086B69007C319C /* Photo.swift */,
 				CE1749F619FEFCF9002B7FBA /* Item.swift */,
 				CE1749CE19FEEF54002B7FBA /* Supporting Files */,
@@ -231,8 +238,10 @@
 				CE1749D419FEEF54002B7FBA /* PIO.xcdatamodeld in Sources */,
 				CE1749D119FEEF54002B7FBA /* AppDelegate.swift in Sources */,
 				CE1749D619FEEF54002B7FBA /* MasterViewController.swift in Sources */,
+				CE53C4BD1A1179DE005E28FB /* ImageMetaData.swift in Sources */,
 				CED87A2B1A086B69007C319C /* Photo.swift in Sources */,
 				CE1749D819FEEF54002B7FBA /* DetailViewController.swift in Sources */,
+				CE53C4BB1A11796C005E28FB /* ImageData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,10 +453,11 @@
 			isa = XCVersionGroup;
 			children = (
 				CED87A271A085113007C319C /* PIO 3.xcdatamodel */,
+				CE53C4B71A117696005E28FB /* PIO 4.xcdatamodel */,
 				CE1749F519FEF822002B7FBA /* PIO 2.xcdatamodel */,
 				CE1749D319FEEF54002B7FBA /* PIO.xcdatamodel */,
 			);
-			currentVersion = CED87A271A085113007C319C /* PIO 3.xcdatamodel */;
+			currentVersion = CE53C4B71A117696005E28FB /* PIO 4.xcdatamodel */;
 			path = PIO.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

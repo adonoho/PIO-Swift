@@ -59,7 +59,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
             let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as Item
-            (segue.destinationViewController as DetailViewController).detailItem = object
+            (segue.destinationViewController as DetailViewController).item = object
             }
         }
     }
