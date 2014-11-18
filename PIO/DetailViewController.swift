@@ -49,18 +49,6 @@ class DetailViewController: UIViewController,
                     itemProblem.text = "Test 2"
                 }
             }
-//            if let photo = item.photo {
-//                
-//                if let imageData = photo.imageData {
-//                    
-//                    if let data = imageData.data {
-//                        
-//                        let image = UIImage(data: data, scale: 0.0)
-//                        
-//                        self.imageView!.image = image
-//                    }
-//                }
-//            }
             if let data = item.photo?.imageData?.data {
                 
                 let image = UIImage(data: data, scale: 0.0)
@@ -141,6 +129,13 @@ class DetailViewController: UIViewController,
         // Dispose of any resources that can be recreated.
     }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showPhoto" {
+            let pvc = segue.destinationViewController as PhotoViewController
+            pvc.photo = self.item?.photo
+        }
+    }
+    
     // MARK: - UITextFieldDelegate methods.
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {

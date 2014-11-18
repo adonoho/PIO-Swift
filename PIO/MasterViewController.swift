@@ -58,8 +58,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
-            let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as Item
-            (segue.destinationViewController as DetailViewController).item = object
+                let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as Item
+                (segue.destinationViewController as DetailViewController).item = object
             }
         }
     }
@@ -103,7 +103,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as Item
-        cell.textLabel.text = NSDate(timeIntervalSince1970: object.timestamp).description
+        cell.textLabel?.text = NSDate(timeIntervalSince1970: object.timestamp).description
 //        cell.textLabel.text = object.valueForKey("timestamp")!.description
     }
 
