@@ -18,6 +18,7 @@
 		CE1749F719FEFCF9002B7FBA /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1749F619FEFCF9002B7FBA /* Item.swift */; };
 		CE53C4BB1A11796C005E28FB /* ImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE53C4BA1A11796C005E28FB /* ImageData.swift */; };
 		CE53C4BD1A1179DE005E28FB /* ImageMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE53C4BC1A1179DE005E28FB /* ImageMetaData.swift */; };
+		CEB3E9B51A1ACAEE00547FC0 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB3E9B41A1ACAEE00547FC0 /* PhotoViewController.swift */; };
 		CED87A2B1A086B69007C319C /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED87A2A1A086B69007C319C /* Photo.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		CE53C4B71A117696005E28FB /* PIO 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PIO 4.xcdatamodel"; sourceTree = "<group>"; };
 		CE53C4BA1A11796C005E28FB /* ImageData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageData.swift; sourceTree = "<group>"; };
 		CE53C4BC1A1179DE005E28FB /* ImageMetaData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageMetaData.swift; sourceTree = "<group>"; };
+		CEB3E9B41A1ACAEE00547FC0 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoViewController.swift; path = PhotoView/PhotoViewController.swift; sourceTree = "<group>"; };
 		CED87A271A085113007C319C /* PIO 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PIO 3.xcdatamodel"; sourceTree = "<group>"; };
 		CED87A2A1A086B69007C319C /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,6 +97,7 @@
 				CE1749D019FEEF54002B7FBA /* AppDelegate.swift */,
 				CE1749D519FEEF54002B7FBA /* MasterViewController.swift */,
 				CE1749D719FEEF54002B7FBA /* DetailViewController.swift */,
+				CEB3E9B41A1ACAEE00547FC0 /* PhotoViewController.swift */,
 				CE1749D919FEEF54002B7FBA /* Main.storyboard */,
 				CE1749DC19FEEF54002B7FBA /* Images.xcassets */,
 				CE1749DE19FEEF54002B7FBA /* LaunchScreen.xib */,
@@ -239,6 +242,7 @@
 				CE1749D119FEEF54002B7FBA /* AppDelegate.swift in Sources */,
 				CE1749D619FEEF54002B7FBA /* MasterViewController.swift in Sources */,
 				CE53C4BD1A1179DE005E28FB /* ImageMetaData.swift in Sources */,
+				CEB3E9B51A1ACAEE00547FC0 /* PhotoViewController.swift in Sources */,
 				CED87A2B1A086B69007C319C /* Photo.swift in Sources */,
 				CE1749D819FEEF54002B7FBA /* DetailViewController.swift in Sources */,
 				CE53C4BB1A11796C005E28FB /* ImageData.swift in Sources */,
