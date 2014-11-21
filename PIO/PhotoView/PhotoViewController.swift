@@ -8,11 +8,12 @@
 
 import UIKit
 
-class PhotoViewController: UIViewController {
+class PhotoViewController: UIViewController, UIScrollViewDelegate {
 
     var photo: Photo?
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var scrollView: UIScrollView!
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -24,9 +25,18 @@ class PhotoViewController: UIViewController {
         // Do any additional setup after loading the view.
         if let data = self.photo?.imageData?.data {
             
-            let image = UIImage(data: data, scale: 0.0)
+            let image = UIImage(data: data, scale: 1.0)
             
             self.imageView.image = image
+            
+            let size = image!.size
+            let bounds = self.view.bounds
+            let xRatio = size.width  / bounds.size.width
+            let yRatio = size.height / bounds.size.height
+            
+            let maxScale = min(xRatio, yRatio)
+            
+            self.scrollView.maximumZoomScale = maxScale
         }
     }
 
@@ -35,7 +45,20 @@ class PhotoViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    // MARK: - UIScrollViewDelegate
 
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        
+        return self.imageView
+        
+    }
+
+    func scrollViewDidEndZooming(scrollView: UIScrollView, withView view: UIView!, atScale scale: CGFloat) {
+        
+        self.scrollView.zoomScale = scale
+        
+    }
     /*
     // MARK: - Navigation
 

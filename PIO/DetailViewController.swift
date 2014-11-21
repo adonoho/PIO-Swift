@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import AssetsLibrary
 
 class DetailViewController: UIViewController,
     UITextFieldDelegate, UITextViewDelegate,
@@ -27,6 +28,24 @@ class DetailViewController: UIViewController,
         }
     }
 
+    var sourceType: UIImagePickerControllerSourceType {
+        get {
+//            return .Camera
+            if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+                
+                return .Camera
+            }
+            else if UIImagePickerController.isSourceTypeAvailable(.SavedPhotosAlbum) {
+                
+                return .SavedPhotosAlbum
+            }
+            else {
+                
+                return .PhotoLibrary;
+            }
+        }
+    }
+    
     func configureView() {
         // Update the user interface for the detail item.
         if let item = self.item {
@@ -63,7 +82,7 @@ class DetailViewController: UIViewController,
         let ipc = UIImagePickerController()
         
         ipc.delegate = self
-        ipc.sourceType = .Camera
+        ipc.sourceType = self.sourceType
         
         self.navigationController?.presentViewController(ipc, animated: true, completion: nil)
         
@@ -160,7 +179,7 @@ class DetailViewController: UIViewController,
 
     // MARK: - UIImagePickerControllerDelegate methods.
 
-    func saveImage(image: UIImage, metaData info: [NSObject : AnyObject]) {
+    func saveData(data: NSData, metaData info: [NSObject : AnyObject]) {
 
         if let item = self.item {
 
@@ -178,16 +197,61 @@ class DetailViewController: UIViewController,
             photo.imageMetaData = imageMetaData
             item.photo = photo
 
-            imageData.data = UIImageJPEGRepresentation(image, 1.0)
+            imageData.data = data
 
             if NSJSONSerialization.isValidJSONObject(info) {
 
                 imageMetaData.data = NSJSONSerialization
                     .dataWithJSONObject(info,
-                    options: NSJSONWritingOptions(),
-                    error: nil)
+                        options: NSJSONWritingOptions(),
+                        error: nil)
             }
             moc.save(nil)
+        }
+        
+    } // saveData(_:metaData:)
+    
+    func saveAssetWithMediaInfo(mediaInfo: [NSObject : AnyObject]) {
+
+        if let assetURL = mediaInfo[UIImagePickerControllerReferenceURL] as? NSURL {
+            
+            let library = ALAssetsLibrary()
+            
+            library.assetForURL(assetURL, resultBlock: { (asset: ALAsset!) -> Void in
+                
+                let property = asset.valueForProperty(ALAssetPropertyType) as NSString
+                
+                if property == ALAssetTypePhoto {
+                    
+                    for uti in asset.valueForProperty(ALAssetPropertyRepresentations) as [NSString] {
+                        
+                        if uti == "public.jpeg" {
+                            
+                            let representation = asset.representationForUTI(uti)
+                            let size = Int(representation.size())
+                            let bytes = UnsafeMutablePointer<UInt8>.alloc(size)
+
+                            if bytes != nil {
+                              
+                                representation.getBytes(bytes, fromOffset: 0, length: size, error: nil)
+                                let data = NSData(bytesNoCopy:bytes, length: size, freeWhenDone: true)
+                                self.saveData(data, metaData: mediaInfo)
+                            }
+                        }
+                    }
+                }
+            }, failureBlock: { (error) -> Void in
+                
+                NSLog("%@", error.userInfo!)
+            })
+        }
+    } // saveAssetWithMediaInfo(_:)
+
+    func saveImage(image: UIImage, metaData info: [NSObject : AnyObject]) {
+        
+        if let data = UIImageJPEGRepresentation(image, 1.0) {
+
+            self.saveData(data, metaData: info)
         }
 
     } // saveImage(_:metaData:)
@@ -202,6 +266,8 @@ class DetailViewController: UIViewController,
 
             self.saveImage(image, metaData: mInfo)
         }
+        else { self.saveAssetWithMediaInfo(info)}
+        
         self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
 
     } // imagePickerController(_:didFinishPickingMediaWithInfo)
