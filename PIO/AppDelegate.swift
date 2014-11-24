@@ -95,13 +95,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if coordinator == nil {
             return nil
         }
-        var managedObjectContext = NSManagedObjectContext()
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
+        
+        // Listen for changes in the background.
+        NSNotificationCenter.defaultCenter()
+            .addObserver(self,
+                selector: "didSaveNotification:",
+                name: NSManagedObjectContextDidSaveNotification,
+                object: nil)
+        
         return managedObjectContext
     }()
 
     // MARK: - Core Data Saving support
 
+    func didSaveNotification(notification: NSNotification) {
+        
+        if let moc = self.managedObjectContext {
+            
+            if moc != notification.object as NSManagedObjectContext {
+                
+                moc.performBlock({ () -> Void in
+                    
+                    moc.mergeChangesFromContextDidSaveNotification(notification)
+                })
+            }
+        }
+    } // didSaveNotification(_:)
+    
     func saveContext () {
         if let moc = self.managedObjectContext {
             var error: NSError? = nil

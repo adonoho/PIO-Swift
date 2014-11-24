@@ -130,8 +130,7 @@ class DetailViewController: UIViewController,
 //    override func viewWillAppear(animated: Bool) {
 //        
 //        super.viewWillAppear(animated)
-//        
-//        self.configureView()
+//        //        self.configureView()
 //        
 //    } // viewWillAppear()
     
@@ -179,34 +178,51 @@ class DetailViewController: UIViewController,
 
     // MARK: - UIImagePickerControllerDelegate methods.
 
+    func peerPrivateMOC(moc: NSManagedObjectContext) -> NSManagedObjectContext {
+        
+        let peerMOC = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        
+        peerMOC.persistentStoreCoordinator = moc.persistentStoreCoordinator
+        
+        return peerMOC
+        
+    } // peerPrivateMOC()
+    
     func saveData(data: NSData, metaData info: [NSObject : AnyObject]) {
 
         if let item = self.item {
 
-            let moc = item.managedObjectContext!
-
-            if let photo = item.photo {
-
-                moc.deleteObject(photo)
-            }
-            let photo = NSEntityDescription.insertNewObjectForEntityForName("Photo", inManagedObjectContext: moc) as Photo
-            let imageData = NSEntityDescription.insertNewObjectForEntityForName("ImageData", inManagedObjectContext: moc) as ImageData
-            let imageMetaData = NSEntityDescription.insertNewObjectForEntityForName("ImageMetaData", inManagedObjectContext: moc) as ImageMetaData
-
-            photo.imageData = imageData
-            photo.imageMetaData = imageMetaData
-            item.photo = photo
-
-            imageData.data = data
-
-            if NSJSONSerialization.isValidJSONObject(info) {
-
-                imageMetaData.data = NSJSONSerialization
-                    .dataWithJSONObject(info,
-                        options: NSJSONWritingOptions(),
-                        error: nil)
-            }
-            moc.save(nil)
+            let moc = self.peerPrivateMOC(item.managedObjectContext!)
+            
+            moc.performBlock({ () -> Void in
+                
+                let bkgItem = moc.objectWithID(item.objectID) as Item
+                
+                if let photo = bkgItem.photo {
+                    
+                    moc.deleteObject(photo)
+                }
+                let photo = NSEntityDescription.insertNewObjectForEntityForName("Photo", inManagedObjectContext: moc) as Photo
+                let imageData = NSEntityDescription.insertNewObjectForEntityForName("ImageData", inManagedObjectContext: moc) as ImageData
+                let imageMetaData = NSEntityDescription.insertNewObjectForEntityForName("ImageMetaData", inManagedObjectContext: moc) as ImageMetaData
+                
+                photo.imageData = imageData
+                photo.imageMetaData = imageMetaData
+                bkgItem.photo = photo
+                
+                imageData.data = data
+                
+                var error: NSError? = nil
+                
+                if NSJSONSerialization.isValidJSONObject(info) {
+                    
+                    imageMetaData.data = NSJSONSerialization
+                        .dataWithJSONObject(info,
+                            options: NSJSONWritingOptions(),
+                            error: &error)
+                }
+                moc.save(&error)
+            })
         }
         
     } // saveData(_:metaData:)
@@ -232,10 +248,18 @@ class DetailViewController: UIViewController,
                             let bytes = UnsafeMutablePointer<UInt8>.alloc(size)
 
                             if bytes != nil {
-                              
-                                representation.getBytes(bytes, fromOffset: 0, length: size, error: nil)
-                                let data = NSData(bytesNoCopy:bytes, length: size, freeWhenDone: true)
-                                self.saveData(data, metaData: mediaInfo)
+                                
+                                var error: NSError? = nil
+                                
+                                representation.getBytes(bytes, fromOffset: 0, length: size, error: &error)
+                                
+                                if error == nil {
+                                    
+                                    let data = NSData(bytesNoCopy:bytes, length: size, freeWhenDone: true)
+                                    
+                                    self.saveData(data, metaData: mediaInfo)
+                                    self.imageView.image = UIImage(data: data, scale: 0.0)
+                                }
                             }
                         }
                     }
@@ -265,6 +289,7 @@ class DetailViewController: UIViewController,
             mInfo.removeValueForKey(UIImagePickerControllerOriginalImage)
 
             self.saveImage(image, metaData: mInfo)
+            self.imageView.image = image
         }
         else { self.saveAssetWithMediaInfo(info)}
         
