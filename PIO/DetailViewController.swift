@@ -188,6 +188,42 @@ class DetailViewController: UIViewController,
         
     } // peerPrivateMOC()
     
+    func resizeImage(image: UIImage, toSize size: CGSize) -> UIImage {
+        
+        if (roundf(Float(size.width)) > 0.0 && roundf(Float(size.height)) > 0.0) {
+            
+            var ratio = Float(size.width / size.height)
+            var imageSize  = image.size;
+            let imageRatio = Float(imageSize.width / imageSize.height)
+            
+            ratio = imageRatio > ratio ?
+                Float(size.width)  / Float(imageSize.width) :
+                Float(size.height) / Float(imageSize.height)
+            
+            imageSize.width  = CGFloat(roundf(Float(imageSize.width)  * ratio))
+            imageSize.height = CGFloat(roundf(Float(imageSize.height) * ratio))
+
+            var smallImage: UIImage? = nil
+            
+            UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+            
+            var rect = CGRectMake(0.0, 0.0, size.width, size.height)
+            let x = CGFloat(roundf((Float(size.width)  - Float(imageSize.width) / 2.0)))
+            let y = CGFloat(roundf((Float(size.height) - Float(imageSize.height)) / 2.0))
+            rect.origin = CGPointMake(x, y)
+            rect.size = imageSize
+            
+            image.drawInRect( rect, blendMode: kCGBlendModeNormal, alpha: 1.0)
+            
+            smallImage = UIGraphicsGetImageFromCurrentImageContext()
+            
+            UIGraphicsEndImageContext()
+            
+            return smallImage!
+        }
+        return image
+    }
+    
     func saveData(data: NSData, metaData info: [NSObject : AnyObject]) {
 
         if let item = self.item {
