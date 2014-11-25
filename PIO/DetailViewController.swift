@@ -123,6 +123,10 @@ class DetailViewController: UIViewController,
                 
                 moc.save(nil)
             }
+            if let photo = item.photo {
+                moc.refreshObject(photo, mergeChanges: false)
+            }
+//            moc.refreshObject(item, mergeChanges: false)
         }
 
     } // viewWillDisappear()
@@ -199,13 +203,15 @@ class DetailViewController: UIViewController,
 
             imageData.data = data
 
-            if NSJSONSerialization.isValidJSONObject(info) {
-
-                imageMetaData.data = NSJSONSerialization
-                    .dataWithJSONObject(info,
-                        options: NSJSONWritingOptions(),
-                        error: nil)
-            }
+            imageMetaData.data = NSKeyedArchiver.archivedDataWithRootObject(info)
+            
+//            if NSJSONSerialization.isValidJSONObject(info) {
+//
+//                imageMetaData.data = NSJSONSerialization
+//                    .dataWithJSONObject(info,
+//                        options: NSJSONWritingOptions(),
+//                        error: nil)
+//            }
             moc.save(nil)
         }
         
@@ -236,6 +242,7 @@ class DetailViewController: UIViewController,
                                 representation.getBytes(bytes, fromOffset: 0, length: size, error: nil)
                                 let data = NSData(bytesNoCopy:bytes, length: size, freeWhenDone: true)
                                 self.saveData(data, metaData: mediaInfo)
+                                self.imageView.image = UIImage(data: data, scale: 0.0)
                             }
                         }
                     }
@@ -265,6 +272,7 @@ class DetailViewController: UIViewController,
             mInfo.removeValueForKey(UIImagePickerControllerOriginalImage)
 
             self.saveImage(image, metaData: mInfo)
+            self.imageView.image = image
         }
         else { self.saveAssetWithMediaInfo(info)}
         
