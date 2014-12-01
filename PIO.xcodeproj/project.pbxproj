@@ -50,6 +50,7 @@
 		CE53C4B71A117696005E28FB /* PIO 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PIO 4.xcdatamodel"; sourceTree = "<group>"; };
 		CE53C4BA1A11796C005E28FB /* ImageData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageData.swift; sourceTree = "<group>"; };
 		CE53C4BC1A1179DE005E28FB /* ImageMetaData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageMetaData.swift; sourceTree = "<group>"; };
+		CE8BEF241A2D0F67004441FF /* PIO 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PIO 5.xcdatamodel"; sourceTree = "<group>"; };
 		CEB3E9B41A1ACAEE00547FC0 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoViewController.swift; path = PhotoView/PhotoViewController.swift; sourceTree = "<group>"; };
 		CED87A271A085113007C319C /* PIO 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PIO 3.xcdatamodel"; sourceTree = "<group>"; };
 		CED87A2A1A086B69007C319C /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
@@ -456,12 +457,13 @@
 		CE1749D219FEEF54002B7FBA /* PIO.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				CE8BEF241A2D0F67004441FF /* PIO 5.xcdatamodel */,
 				CED87A271A085113007C319C /* PIO 3.xcdatamodel */,
 				CE53C4B71A117696005E28FB /* PIO 4.xcdatamodel */,
 				CE1749F519FEF822002B7FBA /* PIO 2.xcdatamodel */,
 				CE1749D319FEEF54002B7FBA /* PIO.xcdatamodel */,
 			);
-			currentVersion = CE53C4B71A117696005E28FB /* PIO 4.xcdatamodel */;
+			currentVersion = CE8BEF241A2D0F67004441FF /* PIO 5.xcdatamodel */;
 			path = PIO.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

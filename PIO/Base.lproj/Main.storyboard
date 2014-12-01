@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rS3-R9-Ivy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rS3-R9-Ivy">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6246"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -75,26 +75,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Detail view content goes here" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Lei-5M-9Gs">
-                                <rect key="frame" x="20" y="292" width="560" height="17"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" size="system"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Your problem goes here." translatesAutoresizingMaskIntoConstraints="NO" id="OO8-R6-0Qh">
-                                <rect key="frame" x="16" y="110" width="568" height="174"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <connections>
-                                    <outlet property="delegate" destination="Ah7-4n-0Wa" id="SMy-wV-UYu"/>
-                                </connections>
-                            </textView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L0q-rl-Ei3">
-                                <rect key="frame" x="16" y="72" width="172" height="30"/>
+                                <rect key="frame" x="20" y="72" width="172" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="172" id="TQ1-u0-1fI"/>
+                                    <constraint firstAttribute="width" constant="172" id="KML-LS-O0g"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
@@ -103,36 +87,40 @@
                                 </connections>
                             </textField>
                             <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="icV-Ni-gCz">
-                                <rect key="frame" x="20" y="317" width="560" height="263"/>
+                                <rect key="frame" x="20" y="292" width="560" height="288"/>
                                 <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="263" id="pbi-Eg-EOg"/>
-                                    <constraint firstAttribute="width" constant="560" id="qEy-LO-Ilw"/>
-                                </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="3Rj-wD-gDA" appends="YES" id="beu-Nr-D4w"/>
                                 </connections>
                             </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Your problem goes here." translatesAutoresizingMaskIntoConstraints="NO" id="OO8-R6-0Qh">
+                                <rect key="frame" x="20" y="110" width="560" height="174"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="174" id="XBE-Ah-Boc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Ah7-4n-0Wa" id="SMy-wV-UYu"/>
+                                </connections>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="L0q-rl-Ei3" firstAttribute="leading" secondItem="MMQ-IT-qOo" secondAttribute="leadingMargin" id="CoZ-mh-YGV"/>
-                            <constraint firstAttribute="bottom" secondItem="icV-Ni-gCz" secondAttribute="bottom" constant="20" id="NfW-n4-DIX"/>
-                            <constraint firstItem="OO8-R6-0Qh" firstAttribute="centerX" secondItem="Lei-5M-9Gs" secondAttribute="centerX" id="QuW-WC-cJj"/>
-                            <constraint firstItem="Lei-5M-9Gs" firstAttribute="centerY" secondItem="MMQ-IT-qOo" secondAttribute="centerY" id="Rxf-lE-47y"/>
-                            <constraint firstItem="Lei-5M-9Gs" firstAttribute="leading" secondItem="MMQ-IT-qOo" secondAttribute="leadingMargin" constant="4" id="TI1-Mn-EhI"/>
-                            <constraint firstItem="Lei-5M-9Gs" firstAttribute="top" secondItem="OO8-R6-0Qh" secondAttribute="bottom" constant="8" symbolic="YES" id="YFb-vJ-Q4S"/>
-                            <constraint firstItem="L0q-rl-Ei3" firstAttribute="top" secondItem="cIm-e0-J51" secondAttribute="bottom" constant="8" symbolic="YES" id="Zjc-d3-A5l"/>
-                            <constraint firstItem="OO8-R6-0Qh" firstAttribute="top" secondItem="L0q-rl-Ei3" secondAttribute="bottom" constant="8" symbolic="YES" id="ZsZ-W6-Hvs"/>
-                            <constraint firstItem="icV-Ni-gCz" firstAttribute="leading" secondItem="MMQ-IT-qOo" secondAttribute="leading" constant="20" id="kMe-wv-dnU"/>
-                            <constraint firstItem="OO8-R6-0Qh" firstAttribute="leading" secondItem="L0q-rl-Ei3" secondAttribute="leading" id="n7e-Mp-rcP"/>
-                            <constraint firstItem="OO8-R6-0Qh" firstAttribute="trailing" secondItem="MMQ-IT-qOo" secondAttribute="trailingMargin" id="qzq-NS-Zey"/>
-                            <constraint firstItem="icV-Ni-gCz" firstAttribute="top" secondItem="MMQ-IT-qOo" secondAttribute="top" constant="317" id="u5P-3m-Sek"/>
+                            <constraint firstItem="icV-Ni-gCz" firstAttribute="centerX" secondItem="MMQ-IT-qOo" secondAttribute="centerX" id="2oq-Kl-gBB"/>
+                            <constraint firstItem="OO8-R6-0Qh" firstAttribute="top" secondItem="L0q-rl-Ei3" secondAttribute="bottom" constant="8" symbolic="YES" id="7kC-Mb-wIv"/>
+                            <constraint firstAttribute="bottom" secondItem="icV-Ni-gCz" secondAttribute="bottom" constant="20" symbolic="YES" id="BrJ-oB-tiJ"/>
+                            <constraint firstItem="icV-Ni-gCz" firstAttribute="leading" secondItem="OO8-R6-0Qh" secondAttribute="leading" id="S07-UD-VdX"/>
+                            <constraint firstItem="icV-Ni-gCz" firstAttribute="top" secondItem="OO8-R6-0Qh" secondAttribute="bottom" constant="8" symbolic="YES" id="UHb-8i-rOd"/>
+                            <constraint firstItem="OO8-R6-0Qh" firstAttribute="trailing" secondItem="icV-Ni-gCz" secondAttribute="trailing" id="cok-qg-QtE"/>
+                            <constraint firstItem="L0q-rl-Ei3" firstAttribute="leading" secondItem="MMQ-IT-qOo" secondAttribute="leadingMargin" constant="4" id="eDU-A2-Muv"/>
+                            <constraint firstItem="L0q-rl-Ei3" firstAttribute="top" secondItem="cIm-e0-J51" secondAttribute="bottom" constant="8" symbolic="YES" id="gcd-uU-9dS"/>
+                            <constraint firstItem="L0q-rl-Ei3" firstAttribute="leading" secondItem="OO8-R6-0Qh" secondAttribute="leading" id="t09-XT-bOg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Item" id="cra-N8-TIN"/>
                     <connections>
-                        <outlet property="detailDescriptionLabel" destination="Lei-5M-9Gs" id="sCT-F7-F6f"/>
                         <outlet property="imageView" destination="icV-Ni-gCz" id="oe5-Kj-mfa"/>
                         <outlet property="itemProblem" destination="OO8-R6-0Qh" id="85P-ZJ-FxK"/>
                         <outlet property="itemTitle" destination="L0q-rl-Ei3" id="Zc4-RW-aK1"/>
