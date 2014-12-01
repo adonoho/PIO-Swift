@@ -14,21 +14,21 @@
         <attribute name="timestamp" attributeType="Date" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="photo" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Photo" inverseName="item" inverseEntity="Photo" syncable="YES"/>
-        <relationship name="thumbnail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Thumbnail" inverseName="item" inverseEntity="Thumbnail" syncable="YES"/>
+        <relationship name="thumbnail" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Thumbnail" inverseName="item" inverseEntity="Thumbnail" syncable="YES"/>
     </entity>
     <entity name="Photo" representedClassName="PIO.Photo" syncable="YES">
         <relationship name="imageData" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ImageData" inverseName="photo" inverseEntity="ImageData" syncable="YES"/>
         <relationship name="imageMetaData" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ImageMetaData" inverseName="photo" inverseEntity="ImageMetaData" syncable="YES"/>
         <relationship name="item" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="photo" inverseEntity="Item" syncable="YES"/>
     </entity>
-    <entity name="Thumbnail" syncable="YES">
+    <entity name="Thumbnail" representedClassName="PIO.Thumbnail" syncable="YES">
         <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
         <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="thumbnail" inverseEntity="Item" syncable="YES"/>
     </entity>
     <elements>
         <element name="ImageData" positionX="-1998" positionY="-2548" width="128" height="73"/>
         <element name="ImageMetaData" positionX="-1998" positionY="-2646" width="128" height="73"/>
-        <element name="Item" positionX="-2252" positionY="-2773" width="128" height="135"/>
+        <element name="Item" positionX="-2252" positionY="-2773" width="128" height="133"/>
         <element name="Photo" positionX="-1998" positionY="-2743" width="128" height="88"/>
         <element name="Thumbnail" positionX="-2000" positionY="-2458" width="128" height="73"/>
     </elements>

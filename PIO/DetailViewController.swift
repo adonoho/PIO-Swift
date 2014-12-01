@@ -228,6 +228,7 @@ class DetailViewController: UIViewController,
 
         if let item = self.item {
 
+            let size = self.imageView.bounds.size
             let moc = self.peerPrivateMOC(item.managedObjectContext!)
             
             moc.performBlock({ () -> Void in
@@ -248,6 +249,13 @@ class DetailViewController: UIViewController,
                 
                 imageData.data = data
                 
+                if let image = UIImage(data: data, scale: 1.0) {
+                    
+                    let thumbnailImage = self.resizeImage(image, toSize: size)
+                    let thumbnail = NSEntityDescription.insertNewObjectForEntityForName("Thumbnail", inManagedObjectContext: moc) as Thumbnail
+                    thumbnail.data = UIImagePNGRepresentation(thumbnailImage)
+                    item.thumbnail = thumbnail
+                }
                 var error: NSError? = nil
                 
                 if NSJSONSerialization.isValidJSONObject(info) {
