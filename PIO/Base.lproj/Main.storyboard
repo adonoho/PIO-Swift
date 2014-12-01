@@ -88,6 +88,7 @@
                             </textField>
                             <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="icV-Ni-gCz">
                                 <rect key="frame" x="20" y="292" width="560" height="288"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="3Rj-wD-gDA" appends="YES" id="beu-Nr-D4w"/>

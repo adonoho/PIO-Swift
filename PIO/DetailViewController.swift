@@ -47,6 +47,7 @@ class DetailViewController: UIViewController,
     }
     
     func configureView() {
+
         // Update the user interface for the detail item.
         if let item = self.item {
             if let label = self.detailDescriptionLabel {
@@ -68,13 +69,20 @@ class DetailViewController: UIViewController,
                     itemProblem.text = "Test 2"
                 }
             }
-            if let data = item.photo?.imageData?.data {
+            if let data = item.thumbnail?.data {
+                
+                let image = UIImage(data: data, scale: 0.0)
+                
+                self.imageView.image = image
+            }
+            else if let data = item.photo?.imageData?.data {
                 
                 let image = UIImage(data: data, scale: 0.0)
                 
                 self.imageView.image = image
             }
         }
+        
     } // configureView()
     
     func showCamera() -> UIImagePickerController {
@@ -239,31 +247,38 @@ class DetailViewController: UIViewController,
                     
                     moc.deleteObject(photo)
                 }
+                if let thumbnail = bkgItem.thumbnail {
+                    
+                    moc.deleteObject(thumbnail)
+                }
                 let photo = NSEntityDescription.insertNewObjectForEntityForName("Photo", inManagedObjectContext: moc) as Photo
                 let imageData = NSEntityDescription.insertNewObjectForEntityForName("ImageData", inManagedObjectContext: moc) as ImageData
-                let imageMetaData = NSEntityDescription.insertNewObjectForEntityForName("ImageMetaData", inManagedObjectContext: moc) as ImageMetaData
-                
-                photo.imageData = imageData
-                photo.imageMetaData = imageMetaData
-                bkgItem.photo = photo
-                
+
                 imageData.data = data
+                photo.imageData = imageData
+                bkgItem.photo = photo
                 
                 if let image = UIImage(data: data, scale: 1.0) {
                     
                     let thumbnailImage = self.resizeImage(image, toSize: size)
-                    let thumbnail = NSEntityDescription.insertNewObjectForEntityForName("Thumbnail", inManagedObjectContext: moc) as Thumbnail
-                    thumbnail.data = UIImagePNGRepresentation(thumbnailImage)
-                    item.thumbnail = thumbnail
+                    if let png = UIImagePNGRepresentation(thumbnailImage) {
+                        
+                        let thumbnail = NSEntityDescription.insertNewObjectForEntityForName("Thumbnail", inManagedObjectContext: moc) as Thumbnail
+                        thumbnail.data = png
+                        bkgItem.thumbnail = thumbnail
+                    }
                 }
                 var error: NSError? = nil
                 
                 if NSJSONSerialization.isValidJSONObject(info) {
                     
+                    let imageMetaData = NSEntityDescription.insertNewObjectForEntityForName("ImageMetaData", inManagedObjectContext: moc) as ImageMetaData
+
                     imageMetaData.data = NSJSONSerialization
                         .dataWithJSONObject(info,
                             options: NSJSONWritingOptions(),
                             error: &error)
+                    photo.imageMetaData = imageMetaData
                 }
                 moc.save(&error)
             })
