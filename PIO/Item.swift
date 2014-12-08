@@ -18,5 +18,6 @@ class Item: NSManagedObject {
     
     // Relations
     @NSManaged var photo: Photo?
+    @NSManaged var thumbnail: Thumbnail?
     
 }

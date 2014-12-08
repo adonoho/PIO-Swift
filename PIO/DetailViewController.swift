@@ -46,7 +46,39 @@ class DetailViewController: UIViewController,
         }
     }
     
+    func readImageInBackground() {
+        
+        if let item = self.item {
+            
+            let moc = peerPrivateMOC(item.managedObjectContext!)
+            
+            moc.performBlock({ () -> Void in
+                
+                let bkgItem = moc.objectWithID(item.objectID) as Item
+                var img: UIImage? = nil
+                
+                if let data = bkgItem.thumbnail?.data {
+                    
+                    img = UIImage(data: data, scale: 0.0)
+                }
+                else if let data = bkgItem.photo?.imageData?.data {
+                    
+                    img = UIImage(data: data, scale: 0.0)
+                }
+                if let image = img {
+                    
+                    item.managedObjectContext?.performBlock({ () -> Void in
+                        
+                        self.imageView.image = image
+                    })
+                }
+            })
+        }
+        
+    } // readImageInBackground()
+    
     func configureView() {
+
         // Update the user interface for the detail item.
         if let item = self.item {
             if let label = self.detailDescriptionLabel {
@@ -68,13 +100,9 @@ class DetailViewController: UIViewController,
                     itemProblem.text = "Test 2"
                 }
             }
-            if let data = item.photo?.imageData?.data {
-                
-                let image = UIImage(data: data, scale: 0.0)
-                
-                self.imageView.image = image
-            }
+            self.readImageInBackground()
         }
+        
     } // configureView()
     
     func showCamera() -> UIImagePickerController {
@@ -130,8 +158,7 @@ class DetailViewController: UIViewController,
 //    override func viewWillAppear(animated: Bool) {
 //        
 //        super.viewWillAppear(animated)
-//        
-//        self.configureView()
+//        //        self.configureView()
 //        
 //    } // viewWillAppear()
     
@@ -179,34 +206,102 @@ class DetailViewController: UIViewController,
 
     // MARK: - UIImagePickerControllerDelegate methods.
 
+    func peerPrivateMOC(moc: NSManagedObjectContext) -> NSManagedObjectContext {
+        
+        let peerMOC = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        
+        peerMOC.persistentStoreCoordinator = moc.persistentStoreCoordinator
+        
+        return peerMOC
+        
+    } // peerPrivateMOC()
+    
+    func resizeImage(image: UIImage, toSize size: CGSize) -> UIImage {
+        
+        if (roundf(Float(size.width)) > 0.0 && roundf(Float(size.height)) > 0.0) {
+            
+            var ratio = Float(size.width / size.height)
+            var imageSize  = image.size;
+            let imageRatio = Float(imageSize.width / imageSize.height)
+            
+            ratio = imageRatio > ratio ?
+                Float(size.width)  / Float(imageSize.width) :
+                Float(size.height) / Float(imageSize.height)
+            
+            imageSize.width  = CGFloat(roundf(Float(imageSize.width)  * ratio))
+            imageSize.height = CGFloat(roundf(Float(imageSize.height) * ratio))
+
+            var smallImage: UIImage? = nil
+            
+            UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+            
+            var rect = CGRectMake(0.0, 0.0, size.width, size.height)
+            let x = CGFloat(roundf((Float(size.width)  - Float(imageSize.width) / 2.0)))
+            let y = CGFloat(roundf((Float(size.height) - Float(imageSize.height)) / 2.0))
+            rect.origin = CGPointMake(x, y)
+            rect.size = imageSize
+            
+            image.drawInRect( rect, blendMode: kCGBlendModeNormal, alpha: 1.0)
+            
+            smallImage = UIGraphicsGetImageFromCurrentImageContext()
+            
+            UIGraphicsEndImageContext()
+            
+            return smallImage!
+        }
+        return image
+    }
+    
     func saveData(data: NSData, metaData info: [NSObject : AnyObject]) {
 
         if let item = self.item {
 
-            let moc = item.managedObjectContext!
+            let size = self.imageView.bounds.size
+            let moc = self.peerPrivateMOC(item.managedObjectContext!)
+            
+            moc.performBlock({ () -> Void in
+                
+                let bkgItem = moc.objectWithID(item.objectID) as Item
+                
+                if let photo = bkgItem.photo {
+                    
+                    moc.deleteObject(photo)
+                }
+                if let thumbnail = bkgItem.thumbnail {
+                    
+                    moc.deleteObject(thumbnail)
+                }
+                let photo = NSEntityDescription.insertNewObjectForEntityForName("Photo", inManagedObjectContext: moc) as Photo
+                let imageData = NSEntityDescription.insertNewObjectForEntityForName("ImageData", inManagedObjectContext: moc) as ImageData
 
-            if let photo = item.photo {
+                imageData.data = data
+                photo.imageData = imageData
+                bkgItem.photo = photo
+                
+                if let image = UIImage(data: data, scale: 1.0) {
+                    
+                    let thumbnailImage = self.resizeImage(image, toSize: size)
+                    if let png = UIImagePNGRepresentation(thumbnailImage) {
+                        
+                        let thumbnail = NSEntityDescription.insertNewObjectForEntityForName("Thumbnail", inManagedObjectContext: moc) as Thumbnail
+                        thumbnail.data = png
+                        bkgItem.thumbnail = thumbnail
+                    }
+                }
+                var error: NSError? = nil
+                
+                if NSJSONSerialization.isValidJSONObject(info) {
+                    
+                    let imageMetaData = NSEntityDescription.insertNewObjectForEntityForName("ImageMetaData", inManagedObjectContext: moc) as ImageMetaData
 
-                moc.deleteObject(photo)
-            }
-            let photo = NSEntityDescription.insertNewObjectForEntityForName("Photo", inManagedObjectContext: moc) as Photo
-            let imageData = NSEntityDescription.insertNewObjectForEntityForName("ImageData", inManagedObjectContext: moc) as ImageData
-            let imageMetaData = NSEntityDescription.insertNewObjectForEntityForName("ImageMetaData", inManagedObjectContext: moc) as ImageMetaData
-
-            photo.imageData = imageData
-            photo.imageMetaData = imageMetaData
-            item.photo = photo
-
-            imageData.data = data
-
-            if NSJSONSerialization.isValidJSONObject(info) {
-
-                imageMetaData.data = NSJSONSerialization
-                    .dataWithJSONObject(info,
-                        options: NSJSONWritingOptions(),
-                        error: nil)
-            }
-            moc.save(nil)
+                    imageMetaData.data = NSJSONSerialization
+                        .dataWithJSONObject(info,
+                            options: NSJSONWritingOptions(),
+                            error: &error)
+                    photo.imageMetaData = imageMetaData
+                }
+                moc.save(&error)
+            })
         }
         
     } // saveData(_:metaData:)
@@ -232,10 +327,18 @@ class DetailViewController: UIViewController,
                             let bytes = UnsafeMutablePointer<UInt8>.alloc(size)
 
                             if bytes != nil {
-                              
-                                representation.getBytes(bytes, fromOffset: 0, length: size, error: nil)
-                                let data = NSData(bytesNoCopy:bytes, length: size, freeWhenDone: true)
-                                self.saveData(data, metaData: mediaInfo)
+                                
+                                var error: NSError? = nil
+                                
+                                representation.getBytes(bytes, fromOffset: 0, length: size, error: &error)
+                                
+                                if error == nil {
+                                    
+                                    let data = NSData(bytesNoCopy:bytes, length: size, freeWhenDone: true)
+                                    
+                                    self.saveData(data, metaData: mediaInfo)
+                                    self.imageView.image = UIImage(data: data, scale: 0.0)
+                                }
                             }
                         }
                     }
@@ -265,6 +368,7 @@ class DetailViewController: UIViewController,
             mInfo.removeValueForKey(UIImagePickerControllerOriginalImage)
 
             self.saveImage(image, metaData: mInfo)
+            self.imageView.image = image
         }
         else { self.saveAssetWithMediaInfo(info)}
         

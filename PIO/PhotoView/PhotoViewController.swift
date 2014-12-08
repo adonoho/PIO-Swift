@@ -23,23 +23,51 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+//        if let data = self.photo?.imageData?.data {
+//            
+//            let image = UIImage(data: data, scale: 1.0)
+//            let size = image!.size
+//            var iBounds = self.imageView.bounds
+//            iBounds.size = size
+//            self.imageView.bounds = iBounds
+//            let bounds = self.scrollView.bounds
+//            let center = CGPoint(x: bounds.size.width / 2.0, y: bounds.size.height / 2.0)
+//            self.imageView.center = center
+//            self.imageView.image = image
+//            
+//            let xRatio = size.width  / bounds.size.width
+//            let yRatio = size.height / bounds.size.height
+//            
+//            let maxScale = max(xRatio, yRatio)
+//            
+//            self.scrollView.maximumZoomScale = maxScale
+//        }
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        
         if let data = self.photo?.imageData?.data {
             
             let image = UIImage(data: data, scale: 1.0)
-            
+            let size = image!.size
+//            var iBounds = self.imageView.bounds
+//            iBounds.size = size
+//            self.imageView.bounds = iBounds
+            let bounds = self.scrollView.bounds
+//            let center = CGPoint(x: bounds.size.width / 2.0, y: bounds.size.height / 2.0)
+//            self.imageView.center = center
             self.imageView.image = image
             
-            let size = image!.size
-            let bounds = self.view.bounds
             let xRatio = size.width  / bounds.size.width
             let yRatio = size.height / bounds.size.height
             
-            let maxScale = min(xRatio, yRatio)
+            let maxScale = max(xRatio, yRatio)
             
             self.scrollView.maximumZoomScale = maxScale
         }
-    }
 
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
