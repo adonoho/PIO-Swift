@@ -25,22 +25,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PIO/PhotoView/PhotoViewController.swift"
-            timestampString = "437967579.637736"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "PIO/AppDelegate.swift"
             timestampString = "438561768.541985"
             startingColumnNumber = "9223372036854775807"
@@ -58,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PIO/DetailViewController.swift"
-            timestampString = "439163526.941229"
+            timestampString = "439166226.471725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
             landmarkName = "resizeImage(_:toSize:)"
             landmarkType = "5">
             <Locations>
@@ -104,11 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PIO/DetailViewController.swift"
-            timestampString = "439163526.941229"
+            timestampString = "439166226.471725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
             landmarkName = "resizeImage(_:toSize:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -120,28 +104,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PIO/DetailViewController.swift"
-            timestampString = "439163526.941229"
+            timestampString = "439166226.471725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "viewWillDisappear(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PIO/DetailViewController.swift"
-            timestampString = "439163526.941229"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "232"
-            endingLineNumber = "232"
-            landmarkName = "resizeImage(_:toSize:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -167,29 +135,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PIO/DetailViewController.swift"
-            timestampString = "439163680.169554"
+            filePath = "PIO/PhotoView/PhotoViewController.swift"
+            timestampString = "439176916.25479"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
-            landmarkName = "saveData(_:metaData:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PIO/DetailViewController.swift"
-            timestampString = "439164632.117876"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
-            landmarkName = "saveData(_:metaData:)"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "viewDidAppear(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

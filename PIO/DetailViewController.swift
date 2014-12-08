@@ -46,6 +46,37 @@ class DetailViewController: UIViewController,
         }
     }
     
+    func readImageInBackground() {
+        
+        if let item = self.item {
+            
+            let moc = peerPrivateMOC(item.managedObjectContext!)
+            
+            moc.performBlock({ () -> Void in
+                
+                let bkgItem = moc.objectWithID(item.objectID) as Item
+                var img: UIImage? = nil
+                
+                if let data = bkgItem.thumbnail?.data {
+                    
+                    img = UIImage(data: data, scale: 0.0)
+                }
+                else if let data = bkgItem.photo?.imageData?.data {
+                    
+                    img = UIImage(data: data, scale: 0.0)
+                }
+                if let image = img {
+                    
+                    item.managedObjectContext?.performBlock({ () -> Void in
+                        
+                        self.imageView.image = image
+                    })
+                }
+            })
+        }
+        
+    } // readImageInBackground()
+    
     func configureView() {
 
         // Update the user interface for the detail item.
@@ -69,18 +100,7 @@ class DetailViewController: UIViewController,
                     itemProblem.text = "Test 2"
                 }
             }
-            if let data = item.thumbnail?.data {
-                
-                let image = UIImage(data: data, scale: 0.0)
-                
-                self.imageView.image = image
-            }
-            else if let data = item.photo?.imageData?.data {
-                
-                let image = UIImage(data: data, scale: 0.0)
-                
-                self.imageView.image = image
-            }
+            self.readImageInBackground()
         }
         
     } // configureView()
